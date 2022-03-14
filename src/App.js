@@ -50,7 +50,7 @@ function App() {
     const leaves = [];
     var index = 0;
     for (var key in wlUsers) {
-      leaves.push(soliditySha3( {t: 'address', v: key}, {t: 'uint256', v: wlUsers[key]}, {t: 'uint256', v: index} ));
+      leaves.push(soliditySha3( {t: 'address', v: key}, {t: 'uint8', v: wlUsers[key]}, {t: 'uint256', v: index} ));
       index++;
     }
 
@@ -95,7 +95,7 @@ function App() {
     const leaves = [];
     var index = 0;
     for (var key in wlUsers) {
-      leaves.push(soliditySha3( {t: 'address', v: key}, {t: 'uint256', v: wlUsers[key]}, {t: 'uint256', v: index} ));
+      leaves.push(soliditySha3( {t: 'address', v: key}, {t: 'uint8', v: wlUsers[key]}, {t: 'uint256', v: index} ));
       index++;
     }
 
@@ -106,7 +106,7 @@ function App() {
 
     console.log("root-- ", hexroot, root_);
 
-    const leaf = soliditySha3({t: 'address', v: address}, {t: 'uint256', v: mint_type}, {t: 'uint256', v: my_index});
+    const leaf = soliditySha3({t: 'address', v: address}, {t: 'uint8', v: mint_type}, {t: 'uint256', v: my_index});
     let proof = tree.getProof(leaf);
     let hexProof = tree.getHexProof(leaf);
 
