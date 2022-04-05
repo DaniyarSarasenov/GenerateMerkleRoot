@@ -78,7 +78,7 @@ function App() {
     var mint_type = "";
     var my_index = 0;
     for (var wallet in wlUsers) {
-      if (address == wallet) {
+      if (address.toLowerCase() == wallet.toLowerCase()) {
         mint_type = wlUsers[wallet];
         is_whitelist = true;
         break;
@@ -106,11 +106,13 @@ function App() {
 
     console.log("root-- ", hexroot, root_);
 
-    const leaf = soliditySha3({t: 'address', v: address}, {t: 'uint256', v: mint_type}, {t: 'uint256', v: my_index});
+    const leaf = soliditySha3({t: 'address', v: address.toLowerCase()}, {t: 'uint256', v: mint_type}, {t: 'uint256', v: my_index});
     let proof = tree.getProof(leaf);
     let hexProof = tree.getHexProof(leaf);
 
-    let proofString = "[";
+    
+    let proofString = "leaf:" + leaf + "\n";
+    proofString += "Proofs \n[";
     hexProof.map(v => {
       proofString += "\"" + v + "\",\n";
       return v;
@@ -118,7 +120,7 @@ function App() {
     proofString = proofString.substring(0, proofString.length - 2);
     proofString += "]";
 
-    setOutdata("index:" + my_index + "\n" + "Mint_type:" + mint_type + "\n" + "Proofs:" +proofString);
+    setOutdata("index:" + my_index + "\n" + "Mint_type:" + mint_type + "\n" + "" +proofString);
   };
 
   useEffect(() => {
